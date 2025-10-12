@@ -5,6 +5,7 @@
 #include "read_channel.h"
 #include <stdio.h>
 #include "led.h"
+#include "joystick.h"
 
 #include <fcntl.h>
 #include <sys/ioctl.h>
@@ -55,6 +56,30 @@ int main()
     printf("CH0=%d CH1=%d\n", ch0, ch1);
 
     close(fd);
+    // int ch0 = read_channel(fd, 0, speed);
+    // int ch1 = read_channel(fd, 1, speed);
+
+    JoystickDirection dir = joystick_get_direction(ch0, ch1);
+
+    switch (dir)
+    {
+    case JOY_UP:
+        printf("UP\n");
+        break;
+    case JOY_DOWN:
+        printf("DOWN\n");
+        break;
+    case JOY_LEFT:
+        printf("LEFT\n");
+        break;
+    case JOY_RIGHT:
+        printf("RIGHT\n");
+        break;
+    default:
+        printf("CENTER\n");
+        break;
+    }
+
     return 0;
 }
 // void foo() {

@@ -3,23 +3,22 @@
 
 #include <stdint.h>
 
+// Calibration constants (you can tweak later)
+#define CENTER_X 2080
+#define CENTER_Y 2050
+#define THRESHOLD 500
+
+// Direction enum
 typedef enum
 {
-    JOY_NONE,
+    JOY_CENTER,
     JOY_UP,
     JOY_DOWN,
     JOY_LEFT,
     JOY_RIGHT
 } JoystickDirection;
 
-// Initialize and close joystick
-int Joystick_init(const char *spiDevice, uint32_t speed_hz);
-void Joystick_cleanup(void);
+// Function declarations
+JoystickDirection joystick_get_direction(int ch0, int ch1);
 
-// Read current joystick direction
-JoystickDirection Joystick_readDirection(void);
-
-// Optionally, read raw channels
-// int Joystick_readChannel(int channel);
-
-#endif
+#endif // JOYSTICK_H

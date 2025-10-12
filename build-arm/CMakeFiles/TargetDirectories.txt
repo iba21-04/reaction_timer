@@ -1,0 +1,8 @@
+/home/ira/ensc351/work/as1/cmake_starter/build-arm/CMakeFiles/edit_cache.dir
+/home/ira/ensc351/work/as1/cmake_starter/build-arm/CMakeFiles/rebuild_cache.dir
+/home/ira/ensc351/work/as1/cmake_starter/build-arm/hal/CMakeFiles/hal.dir
+/home/ira/ensc351/work/as1/cmake_starter/build-arm/hal/CMakeFiles/edit_cache.dir
+/home/ira/ensc351/work/as1/cmake_starter/build-arm/hal/CMakeFiles/rebuild_cache.dir
+/home/ira/ensc351/work/as1/cmake_starter/build-arm/app/CMakeFiles/hello_world.dir
+/home/ira/ensc351/work/as1/cmake_starter/build-arm/app/CMakeFiles/edit_cache.dir
+/home/ira/ensc351/work/as1/cmake_starter/build-arm/app/CMakeFiles/rebuild_cache.dir

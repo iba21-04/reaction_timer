@@ -1,0 +1,1 @@
+/usr/bin/arm-linux-gnueabihf-gcc -fsanitize=address -pthread -Wl,--dependency-file=CMakeFiles/hello_world.dir/link.d CMakeFiles/hello_world.dir/src/badmath.c.o CMakeFiles/hello_world.dir/src/main.c.o CMakeFiles/hello_world.dir/src/reaction_timer.c.o CMakeFiles/hello_world.dir/src/read_channel.c.o -o hello_world  ../hal/libhal.a

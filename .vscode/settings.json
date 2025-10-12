@@ -1,0 +1,7 @@
+{
+    "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+    "files.associations": {
+        "led.h": "c",
+        "reaction_timer.h": "c"
+    }
+}

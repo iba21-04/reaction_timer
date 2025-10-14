@@ -6,7 +6,8 @@
 // Calibration constants (you can tweak later)
 #define CENTER_X 2080
 #define CENTER_Y 2050
-#define THRESHOLD 500
+#define THRESHOLD 450
+#define DEADZONE 150
 
 // Direction enum
 typedef enum

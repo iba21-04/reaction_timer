@@ -35,7 +35,7 @@ void led_set_red(int on)
     write_brightness(RED_BRIGHTNESS_PATH, on ? 1 : 0);
 }
 
-// flash green led 'times' times
+// flash green led number of times
 void led_flash_green(int times, int delayMs)
 {
     for (int i = 0; i < times; ++i)
@@ -47,7 +47,7 @@ void led_flash_green(int times, int delayMs)
     }
 }
 
-// flash red led 4 times
+// flash red led number of times
 void led_flash_red(int times, int delayMs)
 {
     for (int i = 0; i < times; ++i)

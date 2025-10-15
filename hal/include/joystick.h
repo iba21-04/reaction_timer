@@ -17,9 +17,9 @@ typedef enum
     JOY_DOWN,
     JOY_LEFT,
     JOY_RIGHT
-} JoystickDirection;
+} joystick_direction;
 
 // Function declarations
-JoystickDirection joystick_get_direction(int ch0, int ch1);
+joystick_direction joystick_get_direction(int ch0, int ch1);
 
 #endif // JOYSTICK_H

@@ -19,13 +19,6 @@
 #define SPI_SPEED 250000
 
 // Helper to get current time in ms
-// static long long getTimeInMs(void)
-// {
-//     struct timespec spec;
-//     clock_gettime(CLOCK_REALTIME, &spec);
-//     return (long long)spec.tv_sec * 1000 + spec.tv_nsec / 1000000;
-// }
-
 static long long getTimeInMs(void)
 {
     struct timespec spec;
@@ -42,7 +35,7 @@ void reaction_timer_run(void)
     printf("When the LEDs light up, press the joystick in that direction!\n");
     printf("(Press left or right to exit)\n");
 
-    // --- Setup SPI ---
+    // Set up SPI
     int fd = open(SPI_DEVICE, O_RDWR);
     if (fd < 0)
     {
@@ -64,28 +57,27 @@ void reaction_timer_run(void)
     }
 
     srand(time(NULL));
-    long long bestTime = -1; // track fastest correct reaction
+    long long bestTime = 9000; // track fastest correct reaction
 
     while (1)
     {
         printf("\nGet ready...\n");
-
-        // Step 1: Flash LEDs 4 times
+        // Flash LEDs 4 times
         for (int i = 0; i < 4; ++i)
         {
-            led_setGreen(1);
+            led_set_green(1);
             led_sleepMs(250);
-            led_setGreen(0);
+            led_set_green(0);
             led_sleepMs(100);
-            led_setRed(1);
+            led_set_red(1);
             led_sleepMs(250);
-            led_setRed(0);
+            led_set_red(0);
             led_sleepMs(100);
         }
 
-        // Step 2: Wait for joystick release
+        // Wait for joystick release
         int warned = 0;
-        JoystickDirection dir;
+        joystick_direction dir;
         int ch0, ch1;
 
         do
@@ -101,11 +93,11 @@ void reaction_timer_run(void)
             led_sleepMs(100);
         } while (dir == JOY_UP || dir == JOY_DOWN);
 
-        // Step 3: Random delay 0.5–3.0 s
+        // Random delay 0.5–3.0 s
         int delay = 500 + (rand() % 2500);
         led_sleepMs(delay);
 
-        // Step 4: Too soon check
+        // Too soon check
         ch0 = read_channel(fd, 0, speed);
         ch1 = read_channel(fd, 1, speed);
         dir = joystick_get_direction(ch0, ch1);
@@ -115,25 +107,25 @@ void reaction_timer_run(void)
             continue;
         }
 
-        // Step 5: Randomly choose Up or Down
+        // Randomly choose Up or Down
         int choice = rand() % 2; // 0=UP, 1=DOWN
-        JoystickDirection target = (choice == 0) ? JOY_UP : JOY_DOWN;
+        joystick_direction target = (choice == 0) ? JOY_UP : JOY_DOWN;
 
         if (target == JOY_UP)
         {
             printf("Press UP now!\n");
-            led_setGreen(1);
+            led_set_green(1);
         }
         else
         {
             printf("Press DOWN now!\n");
-            led_setRed(1);
+            led_set_red(1);
         }
 
-        // === Step 6: Time reaction ===
+        // Time the reaction
         long long startTime = getTimeInMs();
         long long now = startTime;
-        JoystickDirection userDir = JOY_CENTER;
+        joystick_direction userDir = JOY_CENTER;
 
         while ((now - startTime) < 5000)
         { // 5 s timeout
@@ -156,7 +148,7 @@ void reaction_timer_run(void)
 
         long long reactionTime = now - startTime;
 
-        // === Step 7: Evaluate result ===
+        // Check result
         if (userDir == JOY_LEFT || userDir == JOY_RIGHT)
         {
             printf("User selected to quit.\n");
@@ -172,12 +164,12 @@ void reaction_timer_run(void)
             }
             printf("Your reaction time was %lld ms; best so far is %lld ms.\n",
                    reactionTime, bestTime);
-            led_flashGreen(5, 100); // flash 5× in 1 s
+            led_flash_green(5, 100); // flash 5× in 1 s
         }
         else
         {
             printf("Incorrect.\n");
-            led_flashRed(5, 100);
+            led_flash_red(5, 100);
         }
     }
 

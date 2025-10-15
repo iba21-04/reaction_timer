@@ -9,9 +9,6 @@ joystick_direction joystick_get_direction(int ch0, int ch1)
     int x = ch0 - CENTER_X;
     int y = ch1 - CENTER_Y;
 
-    if (abs(x) < DEADZONE && abs(y) < DEADZONE)
-        return JOY_CENTER;
-
     if (y > THRESHOLD)
         return JOY_UP;
     else if (y < -THRESHOLD)

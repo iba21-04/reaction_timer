@@ -124,10 +124,10 @@ void reaction_timer_run(void)
 
         // Time the reaction
         long long startTime = getTimeInMs();
-        long long now = startTime;
+        long long current_time = startTime;
         joystick_direction userDir = JOY_CENTER;
 
-        while ((now - startTime) < 5000)
+        while ((current_time - startTime) < 5000)
         { // 5 s timeout
             ch0 = read_channel(fd, 0, speed);
             ch1 = read_channel(fd, 1, speed);
@@ -135,18 +135,18 @@ void reaction_timer_run(void)
             if (userDir != JOY_CENTER)
                 break;
             led_sleepMs(50);
-            now = getTimeInMs();
+            current_time = getTimeInMs();
         }
 
         led_off(); // turn off LEDs
 
-        if ((now - startTime) >= 5000)
+        if ((current_time - startTime) >= 5000)
         {
             printf("No input within 5000 ms; quitting!\n");
             break;
         }
 
-        long long reactionTime = now - startTime;
+        long long reactionTime = current_time - startTime;
 
         // Check result
         if (userDir == JOY_LEFT || userDir == JOY_RIGHT)

@@ -9,51 +9,52 @@
 
 #define RED_TRIGGER_PATH "/sys/class/leds/PWR/trigger"
 #define RED_BRIGHTNESS_PATH "/sys/class/leds/PWR/brightness"
+
 // for nanosleep
 #define _POSIX_C_SOURCE 200809L
 
-static void disableLedTrigger(const char *triggerPath);
-static void writeBrightness(const char *brightnessPath, int value);
+static void disable_led_trigger(const char *triggerPath);
+static void write_brightness(const char *brightnessPath, int value);
 
 // initialize the led
 void led_init(void)
 {
-    disableLedTrigger(GREEN_TRIGGER_PATH);
-    disableLedTrigger(RED_TRIGGER_PATH);
+    disable_led_trigger(GREEN_TRIGGER_PATH);
+    disable_led_trigger(RED_TRIGGER_PATH);
 }
 
 // set green led on or off
-void led_setGreen(int on)
+void led_set_green(int on)
 {
-    writeBrightness(GREEN_BRIGHTNESS_PATH, on ? 1 : 0);
+    write_brightness(GREEN_BRIGHTNESS_PATH, on ? 1 : 0);
 }
 
 // set red led on or off
-void led_setRed(int on)
+void led_set_red(int on)
 {
-    writeBrightness(RED_BRIGHTNESS_PATH, on ? 1 : 0);
+    write_brightness(RED_BRIGHTNESS_PATH, on ? 1 : 0);
 }
 
 // flash green led 'times' times
-void led_flashGreen(int times, int delayMs)
+void led_flash_green(int times, int delayMs)
 {
     for (int i = 0; i < times; ++i)
     {
-        led_setGreen(1);
+        led_set_green(1);
         led_sleepMs(delayMs);
-        led_setGreen(0);
+        led_set_green(0);
         led_sleepMs(delayMs);
     }
 }
 
 // flash red led 4 times
-void led_flashRed(int times, int delayMs)
+void led_flash_red(int times, int delayMs)
 {
     for (int i = 0; i < times; ++i)
     {
-        led_setRed(1);
+        led_set_red(1);
         led_sleepMs(delayMs);
-        led_setRed(0);
+        led_set_red(0);
         led_sleepMs(delayMs);
     }
 }
@@ -61,14 +62,14 @@ void led_flashRed(int times, int delayMs)
 // cleanup the led
 void led_off(void)
 {
-    led_setGreen(0);
-    led_setRed(0);
+    led_set_green(0);
+    led_set_red(0);
 }
 
 //**********helper functions*****************//
 
 // helper funtion to disable the led trigger
-static void disableLedTrigger(const char *triggerPath)
+static void disable_led_trigger(const char *triggerPath)
 {
     FILE *f = fopen(triggerPath, "w");
     if (!f)
@@ -88,7 +89,7 @@ static void disableLedTrigger(const char *triggerPath)
 }
 
 // helper function to write brightness value to brightness file
-static void writeBrightness(const char *brightnessPath, int value)
+static void write_brightness(const char *brightnessPath, int value)
 {
     FILE *f = fopen(brightnessPath, "w");
     if (!f)

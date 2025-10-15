@@ -1,6 +1,18 @@
+# Ignore all build directories
 build*/
+build-*/
+
+# Ignore object and library files
 *.o
 *.a
+
+# Ignore binary outputs
 *.elf
 *.bin
 *.zip
+
+# Ignore CMake-generated files
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile

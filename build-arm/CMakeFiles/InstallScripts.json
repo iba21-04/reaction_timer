@@ -1,9 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/home/ira/ensc351/work/as1/cmake_starter/build-arm/cmake_install.cmake",
-		"/home/ira/ensc351/work/as1/cmake_starter/build-arm/hal/cmake_install.cmake",
-		"/home/ira/ensc351/work/as1/cmake_starter/build-arm/app/cmake_install.cmake"
-	],
-	"Parallel" : false
-}

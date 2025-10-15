@@ -10,7 +10,7 @@
 
 int read_channel(int fd, int channel, uint32_t speed_hz)
 {
-    // tx is the message sent to ADC
+    // Check channel validity
     uint8_t tx[3] = {
         (uint8_t)(0x06 | ((channel & 0x04) >> 2)),
         (uint8_t)((channel & 0x03) << 6),
